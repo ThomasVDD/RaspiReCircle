@@ -36,7 +36,7 @@ class ReCircle:
         return self.bays
     
     def pollBays(self):
-        #pollBays(self.bays)
+        pollBays(self.bays)
         return self.bays
     
 #######################################################################################################    
