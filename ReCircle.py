@@ -36,7 +36,7 @@ class ReCircle:
         return self.bays
     
     def pollBays(self):
-        pollBays(self.bays)
+        #pollBays(self.bays)
         return self.bays
     
 #######################################################################################################    
@@ -48,7 +48,7 @@ class ReCircle:
         self.materialsensor = RC_sensor(self.CANobject, RC_addresses.Magazine_Photoelectric_sensor)
         self.materialscanner = RC_sensor(self.CANobject, RC_addresses.Scan_chamber_Matoha_NIR_spectrometer)
         self.display = RC_actuator(self.CANobject, RC_addresses.Display)  
-        self.MagazineMotor = RC_actuator(self.CANobject, Magazine_motor_drive)
+        self.MagazineMotor = RC_actuator(self.CANobject, RC_addresses.Scan_chamber_Motor_driver)
         
         self.motor1 = RC_actuator(self.CANobject, RC_addresses.Wash_chamber_Motor_driver)
         self.motor2 = RC_actuator(self.CANobject, RC_addresses.Scan_chamber_Motor_driver)
