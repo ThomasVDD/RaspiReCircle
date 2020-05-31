@@ -10,5 +10,11 @@ os.system('echo "dtparam=spi=on" | sudo tee -a /boot/config.txt')
 os.system('echo "dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25,spimaxfrequency=500000" | sudo tee -a /boot/config.txt')
 os.system('echo "dtoverlay=spi-bcm2835-overlay" | sudo tee -a /boot/config.txt') 
 
-os.system("cd /home/pi/RaspiReCircle/hardbyte-python-can-4085cffd2519/")
+os.chdir("/home/pi/RaspiReCircle/hardbyte-python-can-4085cffd2519/")
 os.system("sudo python3 setup.py install") 
+
+print("ReCircle setup is complete. A reboot is required to start CAN devices")
+reboot_ans = input("Would you like to do that now? [y/N]: ")
+
+if reboot_ans.lower() == 'y':
+	os.system('reboot')
