@@ -61,6 +61,13 @@ class RC_sensor:
         
     def setMaxWeight(weight):
         self.CANobject.send(self.CAN_ID, [0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, weight])  
+        
+    def getButtonPress():
+        self.CANobject.send(self.CAN_ID, [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])
+        value = self.CANobject.getMessage(self.CAN_ID, 2)
+        if value is not None:
+            button = value.split()
+            return (int(button[0], 16))        
 
 #######################################################################################################
         

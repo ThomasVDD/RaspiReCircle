@@ -63,6 +63,7 @@ class ReCircle:
         self.materialsensor = RC_sensor(self.CANobject, RC_addresses.Magazine_Photoelectric_sensor)
         self.materialscanner = RC_sensor(self.CANobject, RC_addresses.Scan_chamber_Matoha_NIR_spectrometer)
         self.display = RC_actuator(self.CANobject, RC_addresses.Display)  
+        self.buttons = RC_sensor(self.CANobject, RC_addresses.User_buttons)
         self.MagazineMotor = RC_actuator(self.CANobject, RC_addresses.Scan_chamber_Motor_driver)
         
         self.motor1 = RC_actuator(self.CANobject, RC_addresses.Wash_chamber_Motor_driver)
@@ -87,13 +88,18 @@ class ReCircle:
             pass
         self.MagazineMotor.turnMotor(1)
         
+        # Check WIFI connection
         if checkConnection() == True and self.CONNECTION_MODE == True:
-            self.display.show(0, 'WIFI CONN')
+            self.display.show(0, 'WIFI OK')
         elif checkConnection() == False and self.CONNECTION_MODE == True:
-            self.display.show(0, 'WIFI NOT CONN')
+            self.display.show(0, 'WIFI NOT OK')
         else:
-            self.display.show(0, '1CONNECT TO WIFI')
-            self.display.show(1, '2BROWSE 10.0.0.1')
+            self.display.show(0, '*CONNECT TO WIFI')
+            self.display.show(1, '*BROWSE 10.0.0.1')
+        # check buttons
+        print("Reset needed? ")
+        if (self.buttons.getButtonPress()):
+            resetConnection()
         
         sleep(10)
         # IDENTIFY MATERIAL
