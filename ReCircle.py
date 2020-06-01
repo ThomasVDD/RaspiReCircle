@@ -13,7 +13,7 @@ from time import sleep
 class ReCircle:
     
     STATUS = "startup"
-	CONNECTION_MODE = True
+    CONNECTION_MODE = True
     
     def __init__(self, CANobject):
         logging.info('Initializing System')
@@ -21,19 +21,19 @@ class ReCircle:
         self.CANobject = CANobject
         
         logging.info('Initialized System')
-		
-		try: 
-			connectionfile = file('/etc/cron.raspiwifi/')
-			for line in connectionfile:
-				if "app.py" in line:
-					CONNECTION_MODE = False
-					logging.info('Conection: host mode')
-					break
-					
-			if 	CONNECTION_MODE == True:
-				logging.info('Connection: client mode')
-		except
-			pass	
+        
+        try: 
+            connectionfile = file('/etc/cron.raspiwifi/')
+            for line in connectionfile:
+                if "app.py" in line:
+                    CONNECTION_MODE = False
+                    logging.info('Conection: host mode')
+                    break
+                    
+            if  CONNECTION_MODE == True:
+                logging.info('Connection: client mode')
+        except:
+            pass    
         
     def maincontroller(self):
         logging.info('Starting System')
@@ -87,11 +87,11 @@ class ReCircle:
             pass
         self.MagazineMotor.turnMotor(1)
         
-        if checkConnection() == True && CONNECTION_MODE == True:
+        if checkConnection() == True and self.CONNECTION_MODE == True:
             self.display.show(0, 'WIFI CONN')
-        else if checkConnection() == False && CONNECTION_MODE == True:
-			self.display.show(0, 'WIFI NOT CONN')
-		else:
+        elif checkConnection() == False and self.CONNECTION_MODE == True:
+            self.display.show(0, 'WIFI NOT CONN')
+        else:
             self.display.show(0, '1CONNECT TO WIFI')
             self.display.show(1, '2BROWSE 10.0.0.1')
         
