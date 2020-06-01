@@ -13,6 +13,7 @@ from time import sleep
 class ReCircle:
     
     STATUS = "startup"
+	CONNECTION_MODE = True
     
     def __init__(self, CANobject):
         logging.info('Initializing System')
@@ -20,6 +21,19 @@ class ReCircle:
         self.CANobject = CANobject
         
         logging.info('Initialized System')
+		
+		try: 
+			connectionfile = file('/etc/cron.raspiwifi/')
+			for line in connectionfile:
+				if "app.py" in line:
+					CONNECTION_MODE = False
+					logging.info('Conection: host mode')
+					break
+					
+			if 	CONNECTION_MODE == True:
+				logging.info('Connection: client mode')
+		except
+			pass	
         
     def maincontroller(self):
         logging.info('Starting System')
@@ -72,14 +86,16 @@ class ReCircle:
         while(self.materialsensor.getMaterialInput() == 0):
             pass
         self.MagazineMotor.turnMotor(1)
-		
-		if checkConnection() == True:
-			self.display.show(0, 'WIFI CONNECTED')
+        
+        if checkConnection() == True && CONNECTION_MODE == True:
+            self.display.show(0, 'WIFI CONN')
+        else if checkConnection() == False && CONNECTION_MODE == True:
+			self.display.show(0, 'WIFI NOT CONN')
 		else:
-			self.display.show(0, '1CONNECT TO WIFI')
-			self.display.show(1, '2BROWSE 10.0.0.1')
-		
-		sleep(10)
+            self.display.show(0, '1CONNECT TO WIFI')
+            self.display.show(1, '2BROWSE 10.0.0.1')
+        
+        sleep(10)
         # IDENTIFY MATERIAL
         self.STATUS = "Identification"
         self.display.show(0, self.STATUS)
@@ -100,8 +116,8 @@ class ReCircle:
         print(self.tempsensor1.getTemperature())
         sleep(3)
         self.STATUS = "sleeping"
-		
-		
+        
+        
 
 #######################################################################################################
 
@@ -115,7 +131,7 @@ def main():
         level=logging.INFO,
         format="%(asctime)s [%(levelname)s] %(message)s",
         handlers=[
-            logging.FileHandler("logs/debug.log"),
+            logging.FileHandler("/home/pi/RaspiReCircle/logs/debug.log"),
             logging.StreamHandler()
         ]
     ) 
