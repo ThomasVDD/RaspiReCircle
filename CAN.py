@@ -4,6 +4,7 @@ import os
 import sys
 import threading
 import logging
+import connection
 
 class CAN:
 

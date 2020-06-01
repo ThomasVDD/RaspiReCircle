@@ -1,4 +1,5 @@
 from CAN import CAN
+from CONNECTION import * 
 from RC_sensor import RC_sensor
 from RC_actuator import RC_actuator
 from RC_addresses import *
@@ -71,6 +72,14 @@ class ReCircle:
         while(self.materialsensor.getMaterialInput() == 0):
             pass
         self.MagazineMotor.turnMotor(1)
+		
+		if(checkConnection()):
+			self.display.show(0, 'WIFI CONNECTED')
+		else:
+			self.display.show(0, '1CONNECT TO WIFI')
+			self.display.show(1, '2BROWSE 10.0.0.1')
+		
+		sleep(10)
         # IDENTIFY MATERIAL
         self.STATUS = "Identification"
         self.display.show(0, self.STATUS)
@@ -91,6 +100,8 @@ class ReCircle:
         print(self.tempsensor1.getTemperature())
         sleep(3)
         self.STATUS = "sleeping"
+		
+		
 
 #######################################################################################################
 
