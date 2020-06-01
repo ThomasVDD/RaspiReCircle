@@ -22,15 +22,15 @@ class ReCircle:
         
         logging.info('Initialized System')
         
-        try: 
-            connectionfile = file('/etc/cron.raspiwifi/')
+        try:
+            connectionfile = open('/etc/cron.raspiwifi/aphost_bootstrapper', 'r')
             for line in connectionfile:
                 if "app.py" in line:
-                    CONNECTION_MODE = False
+                    self.CONNECTION_MODE = False
                     logging.info('Conection: host mode')
                     break
                     
-            if  CONNECTION_MODE == True:
+            if  self.CONNECTION_MODE == True:
                 logging.info('Connection: client mode')
         except:
             pass    
