@@ -73,7 +73,7 @@ class ReCircle:
             pass
         self.MagazineMotor.turnMotor(1)
 		
-		if(checkConnection()):
+		if checkConnection() == True:
 			self.display.show(0, 'WIFI CONNECTED')
 		else:
 			self.display.show(0, '1CONNECT TO WIFI')
