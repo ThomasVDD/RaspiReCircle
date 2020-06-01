@@ -97,7 +97,6 @@ class ReCircle:
             self.display.show(0, '*CONNECT TO WIFI')
             self.display.show(1, '*BROWSE 10.0.0.1')
         # check buttons
-        print("Reset needed? ")
         if (self.buttons.getButtonPress()):
             resetConnection()
         
