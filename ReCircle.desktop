@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=ReCircle
+#Exec=/usr/bin/python3 /home/pi/RaspiReCircle/ReCircle.py
+Exec=xterm -hold -e '/usr/bin/python3 /home/pi/RaspiReCircle/ReCircle.py'
