@@ -67,13 +67,13 @@ class ReCircle:
     def maincontrollerlogic(self):
         # WAIT FOR INPUT
         self.STATUS = "Wait"
-        self.display.show(0, 'Wait')
+        self.display.show(0, self.STATUS)
         while(self.materialsensor.getMaterialInput() == 0):
             pass
         self.MagazineMotor.turnMotor(1)
         # IDENTIFY MATERIAL
         self.STATUS = "Identification"
-        self.display.show(0, 'Identification')
+        self.display.show(0, self.STATUS)
         while(self.materialscanner.getMaterialType() == 0):
             pass             
         
@@ -104,7 +104,7 @@ def main():
         level=logging.INFO,
         format="%(asctime)s [%(levelname)s] %(message)s",
         handlers=[
-            logging.FileHandler("debug.log"),
+            logging.FileHandler("logs/debug.log"),
             logging.StreamHandler()
         ]
     ) 
