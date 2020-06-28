@@ -13,6 +13,7 @@ os.system("sudo python3 setup.py install")
 # launch ReCircle script at boot
 os.chdir("/home/pi/")
 os.system("sudo apt-get install xterm -y")
+os.system("mkdir /home/pi/.config/autostart")
 os.system("cp /home/pi/RaspiReCircle/ReCircle.desktop /home/pi/.config/autostart")
 
 print("ReCircle setup is complete. A reboot is required to start CAN devices")
